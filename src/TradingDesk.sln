@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDesk", "TradingDesk.csproj", "{2361E9CC-BD93-49EA-A2AE-53526430F08B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2361E9CC-BD93-49EA-A2AE-53526430F08B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2361E9CC-BD93-49EA-A2AE-53526430F08B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2361E9CC-BD93-49EA-A2AE-53526430F08B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2361E9CC-BD93-49EA-A2AE-53526430F08B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CF7632D-0D35-4B7A-BB92-C902B0D25743}
+	EndGlobalSection
+EndGlobal

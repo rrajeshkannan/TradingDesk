@@ -1,0 +1,22 @@
+List<int> - integers (0, 1)
+
+
+trading desk 
+	FX spot trade
+	FX forward trade 
+	FX swap trade --> 2 fx spot trades + FX forward trade
+		USD-EUR - SWAP USD-EUR
+			SPOT USD
+			SPOT EUR
+			FWD USD
+
+	n traders
+	3 traders -> swaps, spots, forwards
+	
+	5 minutes
+		T0-5 MINUTES
+		T0 -> SWAP USD-EUR
+		T0+5 MINUTES
+		T0+5+1 -> REVERSE
+			
+		

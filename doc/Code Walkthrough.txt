@@ -1,0 +1,34 @@
+1. Data Entities - \src\TradeEntity
+	* There are separate classes for each entity - Spot, Forward and Swap
+	* The status of a "Trade" is represented by "Status" enum - Unknown, Open, Fulfilled, Cancelled
+	* The names of currencies as in the current scope are represented by "Currency" enum  
+2. Execution namespace - \src\Execution
+	* It represents the core business logic that captures how each FX transaction gets executed
+	* TradeCancellationValidator - represents the business logic of when a transaction deemed to be cancelled - in our case, after the given period (5 minutes)
+	* BaseExecutionStrategy -  it works for the simple logic as required by both Spot and Forward transactions - they follow simple logic of cancelling after 5 minutes
+	* SwapExecutionStrategy - it comprises of 2 business logics:
+		+ Cancel a transaction after 5 minutes - delegates to BaseExecutionStrategy
+		+ Fulfill a transaction on finding respective 2 Spot transactions (representing the cross-currencies) and 1 Forward transaction
+	* Executor - owns the responsibility for choosing the right strategy according to the kind of transaction (Spot, Swap, Forward)
+3. Engine namespace - \src\Engine
+	* It represents the classes that are responsible for trading-desk execution related functionalities
+	* Ledger - the current state of all transactions in the trading desk
+	* Reconciliation - holds the main logic for carrying out reconciling operation
+		+ It pulls all "executable trades" from "Ledger" and tries to execute them one by one - in the chronological order of the transactions
+		+ It employs a "Dictionary (or Map)" to make the operation of "finding appropriate child transactions for swap transaction" as efficient and simple - a trade-off
+		+ It delegates the action to "ExecutionStrategy" through "Executor" selector - as described in Point-2 above.
+
+	* TradingEngine
+		+ the responsible class for the core business logic
+		+ booking new transactions, periodic state transitions (like after a given period, the open transactions move to Cancelled, etc.)
+		+ it delegates its responsibilities to Ledger and respective execution-strategies
+4. TaskModel - it captures the logic of running the reconciliation operation periodically
+5. Logic
+	* There are 2 possibilities to perform reconciliation operation for transactions:
+		+ Employ a dedicated timer for each transaction and "Fulfill" or "Cancel" them according to expiration of the timer
+		+ Employ a global timer - and try to reconcile every executable (open) transaction
+		+ We employ the approach-2 of global timer - apparently for its "efficiency" with "timer" and no sync-ing required between transactions
+	* Ledger.Reconcile
+		+ Once all the transactions are executed - the ledger tries to effect the current state of the trading desk with the status of individual transactions
+6. Program.cs
+	* It contains 6 test cases depicting 6 possible major scenarios
